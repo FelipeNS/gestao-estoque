@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./CadastroProduto.css";
 import { Link } from "react-router-dom";
-
+import { toast } from "react-toastify";
 import axios from "axios";
 
 class CadastroProduto extends Component {
@@ -18,7 +18,6 @@ class CadastroProduto extends Component {
   }
 
   _registerProduct = () => {
-    console.log(this.state.category);
     axios
       .post(`https://api.vife.dev/stock-management/api/product`, {
         code: this.state.codigo,
@@ -30,12 +29,36 @@ class CadastroProduto extends Component {
       })
       .then(res => {
         const response = res.data;
-        console.log(response);
+        const message = response.message;
+        console.log(message);
+        this.notifySuccess(message);
       })
       .catch(res => {
-        console.log(res);
+        const message = "Ocorreu um erro interno na aplicação";
+        this.notifyError(message);
       });
-    console.clear();
+  };
+
+  notifySuccess = message => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
+  };
+
+  notifyError = message => {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
   };
 
   render() {

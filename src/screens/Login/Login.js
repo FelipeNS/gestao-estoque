@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import api from "../../services/Api";
 
@@ -23,17 +25,31 @@ class Login extends Component {
         password: this.state.password
       })
       .then(response => {
-        console.log("passou aqui 1");
-        console.log(response);
         if (response.data.success === 1) {
           window.location.href = "/home";
+          console.log("Logou");
         } else {
-          console.log(response.data.message);
+          console.log("Erro");
+          const message = response.data.message;
+          this.notify(message);
         }
       })
       .catch(response => {
+        const message = "Ocorreu um erro interno em nosso aplicativo!";
+        this.notify(message);
         console.log(response.data);
       });
+  };
+
+  notify = message => {
+    toast.error("Erro", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
   };
 
   render() {
