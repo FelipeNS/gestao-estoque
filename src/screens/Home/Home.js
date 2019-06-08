@@ -8,7 +8,6 @@ export default class Home extends Component {
       .get(`https://api.vife.dev/stock-management/api/product/all`)
       .then(res => {
         const response = res.data;
-        console.log(response);
         this.setState({
           produtos: response,
           loading: false
@@ -30,11 +29,11 @@ export default class Home extends Component {
   }
 
   render() {
-    if (this.state.loading != true) {
+    if (this.state.loading !== true) {
       if (this.state.produtos) {
         var lista = this.state.produtos.map(function(data) {
           return (
-            <tr>
+            <tr key={data.id}>
               <td className="text-center">{data.id}</td>
               <td>{data.name}</td>
               <td>{data.description}</td>
@@ -96,7 +95,6 @@ export default class Home extends Component {
                 </li>
                 <li className="nav-item">
                   <Link to="cadastro-cliente">
-                    {" "}
                     <a className="nav-link" style={{ color: "#fff" }}>
                       Cadastro De Cleinte
                     </a>
@@ -104,7 +102,6 @@ export default class Home extends Component {
                 </li>
                 <li className="nav-item">
                   <Link to="cadastro-produto">
-                    {" "}
                     <a className="nav-link" style={{ color: "#fff" }}>
                       Cadastro De Produto
                     </a>

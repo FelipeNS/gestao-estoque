@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./CadastroCliente.css";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 class CadastroCliente extends Component {
@@ -73,6 +73,7 @@ class CadastroCliente extends Component {
   render() {
     return (
       <>
+      <ToastContainer />
         <div className="container">
           <div className="row">
             <div className="col-md-12">

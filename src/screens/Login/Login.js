@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Redirect } from "react-router";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 import api from "../../services/Api";
@@ -27,9 +27,8 @@ class Login extends Component {
       .then(response => {
         if (response.data.success === 1) {
           window.location.href = "/home";
-          console.log("Logou");
+          this.notifySuccess("Logado com sucesso");
         } else {
-          console.log("Erro");
           const message = response.data.message;
           this.notify(message);
         }
@@ -37,12 +36,22 @@ class Login extends Component {
       .catch(response => {
         const message = "Ocorreu um erro interno em nosso aplicativo!";
         this.notify(message);
-        console.log(response.data);
       });
   };
 
   notify = message => {
-    toast.error("Erro", {
+    toast.error(message, {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true
+    });
+  };
+
+  notifySuccess = message => {
+    toast.success(message, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -55,6 +64,7 @@ class Login extends Component {
   render() {
     return (
       <>
+        <ToastContainer />
         <form method="get">
           <div className="container" align="center">
             <div className="row">

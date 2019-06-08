@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import "./CadastroProduto.css";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
+import { ToastContainer, toast } from "react-toastify";
 import axios from "axios";
 
 class CadastroProduto extends Component {
@@ -31,7 +31,7 @@ class CadastroProduto extends Component {
         const response = res.data;
         const message = response.message;
         console.log(message);
-        this.notifySuccess(message);
+        this.notifySuccess("Produto cadastrado com sucesso");
       })
       .catch(res => {
         const message = "Ocorreu um erro interno na aplicação";
@@ -40,7 +40,7 @@ class CadastroProduto extends Component {
   };
 
   notifySuccess = message => {
-    toast.error(message, {
+    toast.success(message, {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,
@@ -64,6 +64,7 @@ class CadastroProduto extends Component {
   render() {
     return (
       <div>
+        <ToastContainer />
         <div className="container">
           <div className="row">
             <div className="col-md-12">
