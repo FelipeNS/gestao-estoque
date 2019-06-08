@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 
 export default class Home extends Component {
   componentDidMount() {
+    console.clear();
+    this._getProducts();
+  }
+
+  _getProducts = () => {
     axios
       .get(`https://api.vife.dev/stock-management/api/product/all`)
       .then(res => {
@@ -17,8 +22,7 @@ export default class Home extends Component {
         console.log(resp);
         alert("Você não possuí produtos");
       });
-    console.clear();
-  }
+  };
 
   constructor(props) {
     super(props);
@@ -111,61 +115,90 @@ export default class Home extends Component {
             </div>
           </div>
         </nav>
-        <div style={{ marginTop: 150, marginLeft: "35%" }}>
-          <button
-            class="btn btn-primary btn-fab btn-fab-mini btn-round"
-            style={{ width: 100, height: 100, fontSize: 50, marginRight: 100 }}
-          >
-            <Link to="/cadastro-produto">
-              <i
-                class="material-icons"
-                style={{ fontSize: 50, marginTop: 35, color: "#fff" }}
-              >
-                add
+        <div className="container">
+          <div align="center" style={{ marginTop: 150 }}>
+            <button
+              class="btn btn-primary btn-fab btn-fab-mini btn-round"
+              style={{
+                width: 100,
+                height: 100,
+                fontSize: 50,
+                marginRight: 100
+              }}
+            >
+              <Link to="/cadastro-produto">
+                <i
+                  class="material-icons"
+                  style={{ fontSize: 50, marginTop: 35, color: "#fff" }}
+                >
+                  add
+                </i>
+              </Link>
+            </button>
+            <button
+              class="btn btn-primary btn-fab btn-fab-mini btn-round"
+              style={{
+                width: 100,
+                height: 100,
+                fontSize: 50,
+                marginRight: 100
+              }}
+            >
+              <i class="material-icons" style={{ fontSize: 50, marginTop: 35 }}>
+                edit
               </i>
-            </Link>
-          </button>
-          <button
-            class="btn btn-primary btn-fab btn-fab-mini btn-round"
-            style={{ width: 100, height: 100, fontSize: 50, marginRight: 100 }}
-          >
-            <i class="material-icons" style={{ fontSize: 50, marginTop: 35 }}>
-              edit
-            </i>
-          </button>
-          <button
-            class="btn btn-primary btn-fab btn-fab-mini btn-round"
-            style={{ width: 100, height: 100, fontSize: 50, marginRight: 100 }}
-          >
-            <i class="material-icons" style={{ fontSize: 50, marginTop: 35 }}>
-              close
-            </i>
-          </button>
-        </div>
-        <div style={{ marginTop: 100 }}>
-          <div className="card">
-            <div className="card-body">
-              <table className="table">
-                <thead>
-                  <tr>
-                    <th className="text-center">#</th>
-                    <th>Nome do Produto</th>
-                    <th>Descrição</th>
-                    <th>Categoria</th>
-                    <th className="text-right">Preço</th>
-                    <th className="text-right">Ações</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {this.state.loading ? (
-                    <div>
-                      <p align="center">Carregando</p>
-                    </div>
-                  ) : (
-                    lista
-                  )}
-                </tbody>
-              </table>
+            </button>
+            <button
+              class="btn btn-primary btn-fab btn-fab-mini btn-round"
+              style={{
+                width: 100,
+                height: 100,
+                fontSize: 50,
+                marginRight: 100
+              }}
+            >
+              <i class="material-icons" style={{ fontSize: 50, marginTop: 35 }}>
+                close
+              </i>
+            </button>
+          </div>
+          <div style={{ marginTop: 100 }}>
+            <div className="card">
+              <div className="card-header card-header-text card-header-primary">
+                <div className="card-text">
+                  <h4 className="card-title text-center">Lista de produtos</h4>
+                </div>
+              </div>
+              <br />
+              <div className="card-body">
+                <table className="table">
+                  <thead>
+                    <tr>
+                      <th className="text-center">#</th>
+                      <th>Nome do Produto</th>
+                      <th>Descrição</th>
+                      <th>Categoria</th>
+                      <th className="text-right">Preço</th>
+                      <th className="text-right">Ações</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {this.state.loading ? (
+                      <div className="container">
+                        <div align="center">
+                          <img
+                            src="https://thumbs.gfycat.com/UnitedSmartBinturong-max-1mb.gif"
+                            width="40"
+                            height="40"
+                          />
+                        </div>
+                      </div>
+                    ) : (
+                      lista
+                    )}
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         </div>
