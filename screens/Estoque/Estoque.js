@@ -5,11 +5,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 
 class Estoque extends Component {
-render()
-{
-return( 
-    <>
-        
+  render() {
+    return (
+      <>
         <nav className="navbar navbar-expand-lg bg-primary fixed-top ">
           <div className="container">
             <a className="navbar-brand" />
@@ -54,14 +52,8 @@ return(
             </div>
           </div>
         </nav>
-        
-
-    </>
-);
-
-
-}
-
-
+      </>
+    );
+  }
 }
 export default Estoque;

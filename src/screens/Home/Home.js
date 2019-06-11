@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import axios from "axios";
+
+import Estoque from "../Estoque/Estoque";
 import { Link } from "react-router-dom";
 
 export default class Home extends Component {
@@ -17,9 +19,11 @@ export default class Home extends Component {
           produtos: response,
           loading: false
         });
+        console.log(res);
       })
       .catch(resp => {
         console.log(resp);
+        this.setState({ null: true });
         alert("Você não possuí produtos");
       });
   };
@@ -28,47 +32,41 @@ export default class Home extends Component {
     super(props);
     this.state = {
       produtos: null,
-      loading: true
+      loading: true,
+      null: false
     };
   }
 
   render() {
     if (this.state.loading !== true) {
-      if (this.state.produtos) {
-        var lista = this.state.produtos.map(function(data) {
-          return (
-            <tr key={data.id}>
-              <td className="text-center">{data.id}</td>
-              <td>{data.name}</td>
-              <td>{data.description}</td>
-              <td>{data.category}</td>
-              <td className="text-right">R$ {data.price}</td>
-              <td className="td-actions text-right">
-                <button
-                  type="button"
-                  rel="tooltip"
-                  className="btn btn-info btn-round"
-                >
-                  <i className="material-icons">person</i>
-                </button>
-                <button
-                  type="button"
-                  rel="tooltip"
-                  className="btn btn-success btn-round"
-                >
-                  <i className="material-icons">edit</i>
-                </button>
-                <button
-                  type="button"
-                  rel="tooltip"
-                  className="btn btn-danger btn-round"
-                >
-                  <i className="material-icons">close</i>
-                </button>
-              </td>
-            </tr>
-          );
-        });
+      if (!this.state.null) {
+        if (this.state.produtos) {
+          var lista = this.state.produtos.map(function(data) {
+            return (
+              <tr key={data.id}>
+                <td className="text-center">{data.id}</td>
+                <td>{data.name}</td>
+                <td>{data.description}</td>
+                <td>{data.category}</td>
+                <td className="text-right">R$ {data.price}</td>
+                <td className="text-right">{data.stock_quantity}</td>
+                <td className="td-actions text-right">
+                  <Link to={`/estoque/${data.id}`} id={data.id}>
+                    <button
+                      type="button"
+                      rel="tooltip"
+                      className="btn btn-round"
+                    >
+                      <i className="material-icons">edit</i>
+                    </button>
+                  </Link>
+                </td>
+              </tr>
+            );
+          });
+        }
+      } else {
+        window.location.href = "/cadastro-produto";
       }
     }
     return (
@@ -116,52 +114,8 @@ export default class Home extends Component {
           </div>
         </nav>
         <div className="container">
-          <div align="center" style={{ marginTop: 150 }}>
-            <button
-              class="btn btn-primary btn-fab btn-fab-mini btn-round"
-              style={{
-                width: 100,
-                height: 100,
-                fontSize: 50,
-                marginRight: 100
-              }}
-            >
-              <Link to="/cadastro-produto">
-                <i
-                  class="material-icons"
-                  style={{ fontSize: 50, marginTop: 35, color: "#fff" }}
-                >
-                  add
-                </i>
-              </Link>
-            </button>
-            <button
-              class="btn btn-primary btn-fab btn-fab-mini btn-round"
-              style={{
-                width: 100,
-                height: 100,
-                fontSize: 50,
-                marginRight: 100
-              }}
-            >
-              <i class="material-icons" style={{ fontSize: 50, marginTop: 35 }}>
-                edit
-              </i>
-            </button>
-            <button
-              class="btn btn-primary btn-fab btn-fab-mini btn-round"
-              style={{
-                width: 100,
-                height: 100,
-                fontSize: 50,
-                marginRight: 100
-              }}
-            >
-              <i class="material-icons" style={{ fontSize: 50, marginTop: 35 }}>
-                close
-              </i>
-            </button>
-          </div>
+          <br />
+          <br />
           <div style={{ marginTop: 100 }}>
             <div className="card">
               <div className="card-header card-header-text card-header-primary">
@@ -179,6 +133,7 @@ export default class Home extends Component {
                       <th>Descrição</th>
                       <th>Categoria</th>
                       <th className="text-right">Preço</th>
+                      <th className="text-right">Qtd. Estoque</th>
                       <th className="text-right">Ações</th>
                     </tr>
                   </thead>

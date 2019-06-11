@@ -128,11 +128,6 @@ class CadastroProduto extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">group</i>
-                          </span>
-                        </div>
                         <input
                           onInput={e =>
                             this.setState({ codigo: e.target.value })
@@ -145,11 +140,6 @@ class CadastroProduto extends Component {
                     </div>
                     <div className="col-md-6">
                       <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">group</i>
-                          </span>
-                        </div>
                         <input
                           onInput={e => this.setState({ name: e.target.value })}
                           type="text"
@@ -162,11 +152,6 @@ class CadastroProduto extends Component {
                   <div className="row">
                     <div className="col-md-6">
                       <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">group</i>
-                          </span>
-                        </div>
                         <input
                           onInput={e =>
                             this.setState({ description: e.target.value })
@@ -179,11 +164,6 @@ class CadastroProduto extends Component {
                     </div>
                     <div className="col-md-6">
                       <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text">
-                            <i class="material-icons">group</i>
-                          </span>
-                        </div>
                         <input
                           onInput={e =>
                             this.setState({ category: e.target.value })
@@ -197,11 +177,6 @@ class CadastroProduto extends Component {
                   </div>
                   <div className="col-md-6">
                     <div class="input-group">
-                      <div class="input-group-prepend">
-                        <span class="input-group-text">
-                          <i class="material-icons">group</i>
-                        </span>
-                      </div>
                       <input
                         onInput={e =>
                           this.setState({ description: e.target.value })
